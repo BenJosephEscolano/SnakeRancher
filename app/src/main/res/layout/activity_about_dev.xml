@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutDevActivity"
+    android:background="#3a808a">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_below="@id/aboutdev"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/innovation_pana"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"/>
+
+     <TextView
+         android:layout_marginTop="70dp"
+         android:id="@+id/aboutdev"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+
+         android:text="About the Devs"
+         android:textSize="30sp"
+         android:textColor="@color/white"
+         android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="is a passionate software developer with expertise in building modern web and mobile applications. With a background in Computer Science"
+        android:layout_below="@id/aboutdev"
+        android:layout_toRightOf="@id/image"
+        android:textColor="@color/white"
+        android:layout_alignTop="@id/image"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/projectlead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Project Lead"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:layout_below="@id/image"
+        android:layout_alignLeft="@id/image"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
+        android:layout_below="@id/text"
+        android:layout_marginTop="326dp"
+        android:background="@drawable/bf853c7e_448e_47f3_8a08_e2bae6cdaebf" />
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/programming_rafiki"
+        android:layout_below="@id/projectlead"
+        android:layout_alignRight="@id/text"
+        android:layout_marginTop="50dp"/>
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="is a passionate software developer with expertise in building modern web and mobile applications. With a background in Computer Science"
+        android:layout_below="@id/projectlead"
+
+        android:textColor="@color/white"
+        android:layout_toLeftOf="@id/image2"
+        android:layout_alignTop="@id/image2"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lead Developer"
+        android:layout_below="@id/image2"
+        android:layout_alignRight="@id/image2"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>

@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/border1"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="35dp"
+        android:background="#e5e5e5"
+        android:orientation="horizontal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="122dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginRight="37dp"
+        android:layout_marginBottom="15dp"
+
+        android:background="#ffffff"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="122dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginRight="37dp"
+        android:layout_marginBottom="37dp"
+        android:background="#ffffff"
+        />
+
+    <TextView
+        android:id="@+id/textView_leaderboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Leaderboard"
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
+    
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/imageView_profileIcon1"
+        android:layout_below="@id/textView_leaderboard"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
+
+    <TextView
+        android:id="@+id/textView_Username1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_toRightOf="@+id/imageView_profileIcon1"
+        android:layout_alignTop="@id/imageView_profileIcon1"
+        android:text="Username"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/imageView_profileIcon1"
+        android:layout_alignBottom="@id/imageView_profileIcon1"
+        android:text="Score: 0"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView_Username1"
+        android:layout_toRightOf="@+id/textView_Username1"
+        android:layout_marginLeft="120dp"
+        android:text="1st"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:layout_marginTop="30dp"
+
+        android:id="@+id/imageView_profileIcon2"
+        android:layout_alignLeft="@+id/imageView_profileIcon1"
+        android:layout_below="@+id/imageView_profileIcon1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
+
+    <TextView
+        android:id="@+id/textView_Username2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_toRightOf="@+id/imageView_profileIcon2"
+        android:layout_alignTop="@id/imageView_profileIcon2"
+        android:text="Username"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/imageView_profileIcon2"
+        android:layout_alignBottom="@id/imageView_profileIcon2"
+        android:text="Score: 0"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView_Username2"
+        android:layout_toRightOf="@+id/textView_Username2"
+        android:layout_marginLeft="120dp"
+        android:text="2nd"
+        android:textSize="20sp" />
+    
+    <ImageView
+        android:layout_marginTop="30dp"
+
+        android:id="@+id/imageView_profileIcon3"
+        android:layout_alignLeft="@+id/imageView_profileIcon2"
+        android:layout_below="@+id/imageView_profileIcon2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
+
+    <TextView
+        android:id="@+id/textView_Username3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_toRightOf="@+id/imageView_profileIcon3"
+        android:layout_alignTop="@id/imageView_profileIcon3"
+        android:text="Username"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/imageView_profileIcon3"
+        android:layout_alignBottom="@id/imageView_profileIcon3"
+        android:text="Score: 0"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView_Username3"
+        android:layout_toRightOf="@+id/textView_Username3"
+        android:layout_marginLeft="120dp"
+        android:text="3rd"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:layout_marginTop="30dp"
+
+        android:id="@+id/imageView_profileIcon4"
+        android:layout_alignLeft="@+id/imageView_profileIcon3"
+        android:layout_below="@+id/imageView_profileIcon3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
+
+    <TextView
+        android:id="@+id/textView_Username4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_toRightOf="@+id/imageView_profileIcon4"
+        android:layout_alignTop="@id/imageView_profileIcon4"
+        android:text="Username"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/imageView_profileIcon4"
+        android:layout_alignBottom="@id/imageView_profileIcon4"
+        android:text="Score: 0"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView_Username4"
+        android:layout_toRightOf="@+id/textView_Username4"
+        android:layout_marginLeft="120dp"
+        android:text="4th"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:layout_marginTop="30dp"
+
+        android:id="@+id/imageView_profileIcon5"
+        android:layout_alignLeft="@+id/imageView_profileIcon4"
+        android:layout_below="@+id/imageView_profileIcon4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
+
+    <TextView
+        android:id="@+id/textView_Username5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_toRightOf="@+id/imageView_profileIcon5"
+        android:layout_alignTop="@id/imageView_profileIcon5"
+        android:text="Username"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/imageView_profileIcon5"
+        android:layout_alignBottom="@id/imageView_profileIcon5"
+        android:text="Score: 0"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView_Username5"
+        android:layout_toRightOf="@+id/textView_Username5"
+        android:layout_marginLeft="120dp"
+        android:text="5th"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:layout_marginTop="30dp"
+
+        android:id="@+id/imageView_profileIcon6"
+        android:layout_alignLeft="@+id/imageView_profileIcon5"
+        android:layout_below="@+id/imageView_profileIcon5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
+
+    <TextView
+        android:id="@+id/textView_Username6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_toRightOf="@+id/imageView_profileIcon6"
+        android:layout_alignTop="@id/imageView_profileIcon6"
+        android:text="Username"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/imageView_profileIcon6"
+        android:layout_alignBottom="@id/imageView_profileIcon6"
+        android:text="Score: 0"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView_Username6"
+        android:layout_toRightOf="@+id/textView_Username6"
+        android:layout_marginLeft="120dp"
+        android:text="6th"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:layout_marginTop="30dp"
+
+        android:id="@+id/imageView_profileIcon7"
+        android:layout_alignLeft="@+id/imageView_profileIcon6"
+        android:layout_below="@+id/imageView_profileIcon6"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
+
+    <TextView
+        android:id="@+id/textView_Username7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_toRightOf="@+id/imageView_profileIcon7"
+        android:layout_alignTop="@id/imageView_profileIcon7"
+        android:text="Username"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/imageView_profileIcon7"
+        android:layout_alignBottom="@id/imageView_profileIcon7"
+        android:text="Score: 0"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView_Username7"
+        android:layout_toRightOf="@+id/textView_Username7"
+        android:layout_marginLeft="120dp"
+        android:text="7th"
+        android:textSize="20sp" />
+</RelativeLayout>
