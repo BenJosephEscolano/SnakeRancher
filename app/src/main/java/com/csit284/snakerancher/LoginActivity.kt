@@ -49,7 +49,7 @@ class LoginActivity : Activity() {
                 Toast.makeText(this, "invalid credentials", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }*/
-            val intent = Intent(this, GameActivity::class.java)
+            val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
 
         }

@@ -1,11 +1,14 @@
 package com.csit284.snakerancher
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Canvas
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.graphics.Paint
+import android.graphics.PointF
+import android.graphics.RectF
 import android.view.MotionEvent
 
 class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback {
@@ -16,6 +19,37 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
     private var squareY = 100f  // Square's Y position
     private var direction = "RIGHT" // Default direction
     private val speed = 10f // Speed of movement
+    private var food = PointF(300f, 300f)
+
+    private var touchStartX = 0f
+    private var touchStartY = 0f
+    private val swipeThreshold = 50
+
+    private val headUp = BitmapFactory.decodeResource(resources, R.drawable.head_up)
+    private val headDown = BitmapFactory.decodeResource(resources, R.drawable.head_down)
+    private val headLeft = BitmapFactory.decodeResource(resources, R.drawable.head_left)
+    private val headRight = BitmapFactory.decodeResource(resources, R.drawable.head_right)
+
+    private val bodyHorizontal = BitmapFactory.decodeResource(resources, R.drawable.body_horizontal)
+    private val bodyVertical = BitmapFactory.decodeResource(resources, R.drawable.body_vertical)
+
+    private val bodyCornerBL = BitmapFactory.decodeResource(resources, R.drawable.body_topleft)
+    private val bodyCornerBR = BitmapFactory.decodeResource(resources, R.drawable.body_topright)
+    private val bodyCornerTL = BitmapFactory.decodeResource(resources, R.drawable.body_bottomleft)
+    private val bodyCornerTR = BitmapFactory.decodeResource(resources, R.drawable.body_bottomright)
+
+    private val tailUp = BitmapFactory.decodeResource(resources, R.drawable.tail_up)
+    private val tailDown = BitmapFactory.decodeResource(resources, R.drawable.tail_down)
+    private val tailLeft = BitmapFactory.decodeResource(resources, R.drawable.tail_left)
+    private val tailRight = BitmapFactory.decodeResource(resources, R.drawable.tail_right)
+    private val foodBitmap = BitmapFactory.decodeResource(resources, R.drawable.apple)
+
+    private val background = BitmapFactory.decodeResource(resources, R.drawable.grass_template2)
+
+    // Add direction info for body parts
+    data class SnakeSegment(var x: Float, var y: Float, val direction: String, val prevDirection: String)
+
+    private val snake = mutableListOf(SnakeSegment(100f, 100f, "RIGHT", "RIGHT"))
 
     private val paint = Paint().apply {
         color = Color.GREEN
@@ -26,49 +60,200 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
         holder.addCallback(this)
     }
 
+
+    private val gridPaint = Paint().apply {
+        color = Color.GRAY
+        style = Paint.Style.STROKE
+        strokeWidth = 2f
+    }
+
+
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
 
         canvas.drawColor(Color.BLACK) // Clear screen
-        canvas.drawRect(squareX, squareY, squareX + 50, squareY + 50, paint) // Draw square
+        canvas.drawBitmap(background, 0f,0f, null)
+        val gridSize = 40 // Desired grid size (adjust this as necessary)
+        val cols = (width / gridSize) // Calculate number of columns
+        val rows = (height / gridSize) // Calculate number of rows
+
+        // Draw the vertical lines
+        for (col in 0 until cols) {
+            val x = col * gridSize.toFloat()
+            canvas.drawLine(x, 0f, x, height.toFloat(), gridPaint)
+        }
+
+        // Draw the horizontal lines
+        for (row in 0 until rows) {
+            val y = row * gridSize.toFloat()
+            canvas.drawLine(0f, y, width.toFloat(), y, gridPaint)
+        }
+
+        for (i in snake.indices) {
+            val segment = snake[i]
+            val bitmap = when {
+                i == 0 -> { // Head
+                    when (segment.direction) {
+                        "UP" -> headUp
+                        "DOWN" -> headDown
+                        "LEFT" -> headLeft
+                        "RIGHT" -> headRight
+                        else -> headRight // Default
+                    }
+                }
+                i == snake.size - 1 -> { // Tail
+                    when (segment.direction) {
+                        "UP" -> tailDown // Tail pointing upwards
+                        "DOWN" -> tailUp // Tail pointing downwards
+                        "LEFT" -> tailRight // Tail pointing left
+                        "RIGHT" -> tailLeft // Tail pointing right
+                        else -> tailRight // Default
+                    }
+                }
+                else -> { // Body
+                    val prevSegment = snake[i - 1]
+                    val nextSegment = snake[i + 1]
+                    when {
+                        prevSegment.direction == "UP" && nextSegment.direction == "RIGHT" -> bodyCornerTL
+                        prevSegment.direction == "UP" && nextSegment.direction == "LEFT" -> bodyCornerTR
+                        prevSegment.direction == "DOWN" && nextSegment.direction == "LEFT" -> bodyCornerBL
+                        prevSegment.direction == "DOWN" && nextSegment.direction == "RIGHT" -> bodyCornerBR
+                        prevSegment.direction == nextSegment.direction -> {
+                            if (prevSegment.direction == "LEFT" || prevSegment.direction == "RIGHT") {
+                                bodyHorizontal
+                            } else {
+                                bodyVertical
+                            }
+                        }
+                        else -> bodyHorizontal // Default to horizontal body
+                    }
+                }
+            }
+            canvas.drawBitmap(bitmap, segment.x, segment.y, null)
+        }
+
+        // Draw Food (same as before)
+        canvas.drawBitmap(foodBitmap, food.x, food.y, null)
     }
 
     fun update() {
+        var newHead = SnakeSegment(snake[0].x, snake[0].y, direction, snake[0].direction)
         when (direction) {
-            "LEFT" -> squareX -= speed
-            "RIGHT" -> squareX += speed
-            "UP" -> squareY -= speed
-            "DOWN" -> squareY += speed
+            "LEFT" -> newHead.x -= 60
+            "RIGHT" -> newHead.x += 60
+            "UP" -> newHead.y -= 60
+            "DOWN" -> newHead.y += 60
         }
+        for (i in 1 until snake.size) {
+            val segment = snake[i]
+            // Update the direction based on previous and next segment
+        }
+
+        snake.add(0, newHead) // Add new head
+
+        // Check if food is eaten
+        val headRect = RectF(newHead.x, newHead.y, newHead.x + 50, newHead.y + 50)
+        val foodRect = RectF(food.x, food.y, food.x + 50, food.y + 50)
+        if (headRect.intersect(foodRect)) {
+            food = generateRandomFoodPosition() // Generate new food
+            // Don't remove tail => snake grows
+        } else {
+            snake.removeAt(snake.size - 1) // Remove tail
+        }
+
+        // Collision with self
+        for (i in 1 until snake.size) {
+            if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
+                running = false // Game over
+            }
+        }
+
+        // Collision with wall
+        if (snake[0].x < 0 || snake[0].x > width - 50 ||
+            snake[0].y < 0 || snake[0].y > height - 50) {
+            running = false // Game over
+        }
+    }
+
+    private fun generateRandomFoodPosition(): PointF {
+        val gridSize = 50
+        val cols = width / gridSize
+        val rows = height / gridSize
+
+        val randomCol = (0 until cols).random()
+        val randomRow = (0 until rows).random()
+
+        return PointF((randomCol * gridSize).toFloat(), (randomRow * gridSize).toFloat())
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
-                direction = when (direction) {
-                    "RIGHT" -> "DOWN"
-                    "DOWN" -> "LEFT"
-                    "LEFT" -> "UP"
-                    else -> "RIGHT"
+                touchStartX = event.x
+                touchStartY = event.y
+            }
+            MotionEvent.ACTION_UP -> {
+                val dx = event.x - touchStartX
+                val dy = event.y - touchStartY
+
+                if (abs(dx) > abs(dy)) {
+                    if (dx > swipeThreshold && direction != "LEFT") {
+                        direction = "RIGHT"
+                    } else if (dx < -swipeThreshold && direction != "RIGHT") {
+                        direction = "LEFT"
+                    }
+                } else {
+                    if (dy > swipeThreshold && direction != "UP") {
+                        direction = "DOWN"
+                    } else if (dy < -swipeThreshold && direction != "DOWN") {
+                        direction = "UP"
+                    }
                 }
             }
         }
         return true
     }
 
+    private fun abs(n: Float): Float{
+        if (n < 0){
+            return n * -1;
+        }
+        return n;
+    }
+
     private fun startGameLoop() {
         running = true
         gameThread = Thread {
+            var lastTime = System.nanoTime()
+            val nsPerUpdate = 1_000_000_000.0 / 10.0 // 10 updates per second
+
+            var delta = 0.0
+
             while (running) {
-                update()
-                val canvas = holder.lockCanvas()
-                if (canvas != null) {
-                    synchronized(holder) {
-                        draw(canvas)
-                    }
-                    holder.unlockCanvasAndPost(canvas)
+                val now = System.nanoTime()
+                delta += (now - lastTime) / nsPerUpdate
+                lastTime = now
+
+                var shouldRender = false
+
+                while (delta >= 1) {
+                    update()
+                    delta--
+                    shouldRender = true
                 }
-                Thread.sleep(50) // Adjust speed
+
+                if (shouldRender) {
+                    val canvas = holder.lockCanvas()
+                    if (canvas != null) {
+                        synchronized(holder) {
+                            draw(canvas)
+                        }
+                        holder.unlockCanvasAndPost(canvas)
+                    }
+                }
+
+                // Give time back to CPU to prevent tight loop
+                Thread.sleep(2)
             }
         }
         gameThread?.start()
