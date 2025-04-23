@@ -15,7 +15,7 @@
         android:theme="@style/Theme.SnakeRancher"
         tools:targetApi="31">
         <activity
-            android:name=".Menu2"
+            android:name=".CustomizationActivity"
             android:exported="false" />
         <activity
             android:name=".GameActivity"
@@ -43,6 +43,9 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LandingPageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

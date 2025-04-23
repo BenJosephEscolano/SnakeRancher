@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.csit284.snakerancher.util.PrefManager
 
 class SettingActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,8 +19,10 @@ class SettingActivity : Activity() {
         val aboutDev = findViewById<Button>(R.id.btn_about_dev)
 
         returnToMain.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            val prefManager = PrefManager(this)
+            prefManager.logoutUser()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
         aboutDev.setOnClickListener(){

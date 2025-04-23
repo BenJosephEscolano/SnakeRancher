@@ -1,15 +1,24 @@
 package com.csit284.snakerancher
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.graphics.Canvas
-import android.view.SurfaceHolder
-import android.view.SurfaceView
+import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Point
 import android.graphics.PointF
 import android.graphics.RectF
+import android.graphics.Typeface
+import android.os.Handler
+import android.os.Looper
 import android.view.MotionEvent
+import android.view.SurfaceHolder
+import android.view.SurfaceView
+import com.csit284.snakerancher.util.PrefManager
+import com.csit284.snakerancher.util.SnakeShape
+
 
 class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback {
     private var gameThread: Thread? = null
@@ -19,11 +28,14 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
     private var squareY = 100f  // Square's Y position
     private var direction = "RIGHT" // Default direction
     private val speed = 10f // Speed of movement
+    private val cellSize = 40f;
     private var food = PointF(300f, 300f)
 
     private var touchStartX = 0f
     private var touchStartY = 0f
     private val swipeThreshold = 50
+
+    private var score = 0;
 
     private val headUp = BitmapFactory.decodeResource(resources, R.drawable.head_up)
     private val headDown = BitmapFactory.decodeResource(resources, R.drawable.head_down)
@@ -73,67 +85,102 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
 
         canvas.drawColor(Color.BLACK) // Clear screen
         canvas.drawBitmap(background, 0f,0f, null)
-        val gridSize = 40 // Desired grid size (adjust this as necessary)
-        val cols = (width / gridSize) // Calculate number of columns
-        val rows = (height / gridSize) // Calculate number of rows
+//        val gridSize = 40 // Desired grid size (adjust this as necessary)
+//        val cols = (width / gridSize) // Calculate number of columns
+//        val rows = (height / gridSize) // Calculate number of rows
 
-        // Draw the vertical lines
-        for (col in 0 until cols) {
-            val x = col * gridSize.toFloat()
-            canvas.drawLine(x, 0f, x, height.toFloat(), gridPaint)
-        }
+//        // Draw the vertical lines
+//        for (col in 0 until cols) {
+//            val x = col * gridSize.toFloat()
+//            canvas.drawLine(x, 0f, x, height.toFloat(), gridPaint)
+//        }
+//
+//        // Draw the horizontal lines
+//        for (row in 0 until rows) {
+//            val y = row * gridSize.toFloat()
+//            canvas.drawLine(0f, y, width.toFloat(), y, gridPaint)
+//        }
+        val prefManager = PrefManager(context)
+        val snakeStyle = prefManager.getSnakeStyle()
+        val shape = snakeStyle.shape
+        val colors = snakeStyle.colors
 
-        // Draw the horizontal lines
-        for (row in 0 until rows) {
-            val y = row * gridSize.toFloat()
-            canvas.drawLine(0f, y, width.toFloat(), y, gridPaint)
-        }
-
+// Then when drawing each segment of the snake:
+        val paint = Paint()
         for (i in snake.indices) {
             val segment = snake[i]
-            val bitmap = when {
-                i == 0 -> { // Head
-                    when (segment.direction) {
-                        "UP" -> headUp
-                        "DOWN" -> headDown
-                        "LEFT" -> headLeft
-                        "RIGHT" -> headRight
-                        else -> headRight // Default
-                    }
-                }
-                i == snake.size - 1 -> { // Tail
-                    when (segment.direction) {
-                        "UP" -> tailDown // Tail pointing upwards
-                        "DOWN" -> tailUp // Tail pointing downwards
-                        "LEFT" -> tailRight // Tail pointing left
-                        "RIGHT" -> tailLeft // Tail pointing right
-                        else -> tailRight // Default
-                    }
-                }
-                else -> { // Body
-                    val prevSegment = snake[i - 1]
-                    val nextSegment = snake[i + 1]
-                    when {
-                        prevSegment.direction == "UP" && nextSegment.direction == "RIGHT" -> bodyCornerTL
-                        prevSegment.direction == "UP" && nextSegment.direction == "LEFT" -> bodyCornerTR
-                        prevSegment.direction == "DOWN" && nextSegment.direction == "LEFT" -> bodyCornerBL
-                        prevSegment.direction == "DOWN" && nextSegment.direction == "RIGHT" -> bodyCornerBR
-                        prevSegment.direction == nextSegment.direction -> {
-                            if (prevSegment.direction == "LEFT" || prevSegment.direction == "RIGHT") {
-                                bodyHorizontal
-                            } else {
-                                bodyVertical
-                            }
-                        }
-                        else -> bodyHorizontal // Default to horizontal body
-                    }
-                }
+            val color = when (i) {
+                0 -> colors[0] // Head
+                snake.lastIndex -> colors[2] // Tail
+                else -> colors[1] // Body
             }
-            canvas.drawBitmap(bitmap, segment.x, segment.y, null)
+
+            paint.color = color
+            val left = segment.x * cellSize.toFloat()
+            val top = segment.y * cellSize.toFloat()
+            val centerX = left + cellSize / 2
+            val centerY = top + cellSize / 2
+
+            if (shape == SnakeShape.SHARP) {
+                canvas.drawRect(left, top, left + cellSize, top + cellSize, paint)
+            } else {
+                val radius = cellSize / 2f
+                canvas.drawCircle(centerX, centerY, radius, paint)
+            }
         }
+//        for (i in snake.indices) {
+//            val segment = snake[i]
+//            val bitmap = when {
+//                i == 0 -> { // Head
+//                    when (segment.direction) {
+//                        "UP" -> headUp
+//                        "DOWN" -> headDown
+//                        "LEFT" -> headLeft
+//                        "RIGHT" -> headRight
+//                        else -> headRight // Default
+//                    }
+//                }
+//                i == snake.size - 1 -> { // Tail
+//                    when (segment.direction) {
+//                        "UP" -> tailDown // Tail pointing upwards
+//                        "DOWN" -> tailUp // Tail pointing downwards
+//                        "LEFT" -> tailRight // Tail pointing left
+//                        "RIGHT" -> tailLeft // Tail pointing right
+//                        else -> tailRight // Default
+//                    }
+//                }
+//                else -> { // Body
+//                    val prevSegment = snake[i - 1]
+//                    val nextSegment = snake[i + 1]
+//                    when {
+//                        prevSegment.direction == "UP" && nextSegment.direction == "RIGHT" -> bodyCornerTL
+//                        prevSegment.direction == "UP" && nextSegment.direction == "LEFT" -> bodyCornerTR
+//                        prevSegment.direction == "DOWN" && nextSegment.direction == "LEFT" -> bodyCornerBL
+//                        prevSegment.direction == "DOWN" && nextSegment.direction == "RIGHT" -> bodyCornerBR
+//                        prevSegment.direction == nextSegment.direction -> {
+//                            if (prevSegment.direction == "LEFT" || prevSegment.direction == "RIGHT") {
+//                                bodyHorizontal
+//                            } else {
+//                                bodyVertical
+//                            }
+//                        }
+//                        else -> bodyHorizontal // Default to horizontal body
+//                    }
+//                }
+//            }
+//            canvas.drawBitmap(bitmap, segment.x, segment.y, null)
+//        }
 
         // Draw Food (same as before)
         canvas.drawBitmap(foodBitmap, food.x, food.y, null)
+
+        //val paint = Paint()
+        paint.color = Color.WHITE
+        paint.textSize = 60f
+        paint.typeface = Typeface.DEFAULT_BOLD
+
+        // Draw the score
+        canvas.drawText("Score: $score", 50f, 100f, paint)
     }
 
     fun update() {
@@ -156,6 +203,7 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
         val foodRect = RectF(food.x, food.y, food.x + 50, food.y + 50)
         if (headRect.intersect(foodRect)) {
             food = generateRandomFoodPosition() // Generate new food
+            score += 50;
             // Don't remove tail => snake grows
         } else {
             snake.removeAt(snake.size - 1) // Remove tail
@@ -172,6 +220,9 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
         if (snake[0].x < 0 || snake[0].x > width - 50 ||
             snake[0].y < 0 || snake[0].y > height - 50) {
             running = false // Game over
+        }
+        if (running == false){
+            onGameOver()
         }
     }
 
@@ -221,6 +272,26 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
         return n;
     }
 
+    fun onGameOver() {
+        // Save score or anything else
+        val prefManager = PrefManager(context)
+        prefManager.getLoggedInUser()?.let { prefManager.updateScore(it.username,score) }
+        // Use a Handler to switch back to the UI thread and show a dialog or switch Activity
+        Handler(Looper.getMainLooper()).post {
+            AlertDialog.Builder(context)
+                .setTitle("Game Over")
+                .setMessage("Your score: $score")
+                .setCancelable(false)
+                .setPositiveButton("Restart") { _, _ ->
+                    restartGame()
+                }
+                .setNegativeButton("Exit") { _, _ ->
+                    (context as Activity).finish()
+                }
+                .show()
+        }
+    }
+
     private fun startGameLoop() {
         running = true
         gameThread = Thread {
@@ -257,6 +328,30 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
             }
         }
         gameThread?.start()
+    }
+
+    private fun restartGame() {
+        // Reset snake position to starting position
+        snake.clear()
+        snake.add(SnakeSegment(100f, 100f, "RIGHT", "RIGHT")) // Add head at center
+
+        // Reset direction (assuming you store direction)
+        direction = "RIGHT"// Or whatever your default direction is
+
+        // Reset score
+        score = 0
+
+        // Clear any pending movement handlers
+        handler.removeCallbacksAndMessages(null)
+
+        // Reset food position
+        food = PointF(300f, 300f)
+
+        // Reset game speed if you have increasing difficulty
+
+        // Start the game loop again
+        startGameLoop()
+
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {

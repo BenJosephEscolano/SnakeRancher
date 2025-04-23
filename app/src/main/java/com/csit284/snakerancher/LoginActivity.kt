@@ -9,27 +9,28 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.csit284.snakerancher.util.PrefManager
 
 class LoginActivity : Activity() {
     //@SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
+
+
         val edittext_password = findViewById<EditText>(R.id.edittext_password)
         val edittext_username = findViewById<EditText>(R.id.edittext_username)
         val button_register = findViewById<Button>(R.id.login_button)
         val text_newAccount = findViewById<TextView>(R.id.textView_newAccount)
         val text_forgotPass = findViewById<TextView>(R.id.textview_forgotPass)
-        val account = AccountManager.create();
-        val profile = Profile();
+
         intent?.let{
             it.getStringExtra("username")?.let{ username->
-                profile.username = username;
+                edittext_username.setText(username)
             }
             it.getStringExtra("password")?.let{ password->
-                profile.password = password;
+                edittext_username.setText(password)
             }
-            account.add(profile)
         }
 
 
@@ -39,8 +40,9 @@ class LoginActivity : Activity() {
                 Toast.makeText(this,"username and password must not be empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
-            if (!account.validate(edittext_username.text.toString(), edittext_password.text.toString())){
+            val prefManager = PrefManager(this)
+            val isLoggedIn = prefManager.login(edittext_password.text.toString(), edittext_username.text.toString())
+            if (!isLoggedIn){
                 Toast.makeText(this, "invalid credentials", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }

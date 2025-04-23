@@ -31,7 +31,7 @@ class MenuActivity : Activity() {
         }
 
         play.setOnClickListener(){
-            val intent = Intent(this, GameActivity::class.java)
+            val intent = Intent(this, CustomizationActivity::class.java)
             startActivity(intent)
         }
 

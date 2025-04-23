@@ -12,6 +12,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.csit284.snakerancher.util.PrefManager
+import com.csit284.snakerancher.util.User
 
 class RegisterActivity : Activity() {
     @SuppressLint("MissingInflatedId")
@@ -27,6 +29,14 @@ class RegisterActivity : Activity() {
                 Toast.makeText(this,"username and password must not be empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            val prefManager = PrefManager(this)
+            val isRegistered = prefManager.addUser(User(edittext_username.text.toString(), edittext_password.text.toString(), 0))
+            if (isRegistered) {
+                Toast.makeText(this, "User registered!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Username taken.", Toast.LENGTH_SHORT).show()
+            }
+
             val intent = Intent(this, LoginActivity::class.java).apply{
                 putExtra("username", edittext_username.text.toString());
                 putExtra("password", edittext_password.text.toString())

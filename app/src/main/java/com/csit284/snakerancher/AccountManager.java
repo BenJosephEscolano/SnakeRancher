@@ -31,7 +31,7 @@ public class AccountManager {
 
     public static AccountManager create(){
         if (account == null){
-            account = new AccountManager();
+            //account = new AccountManager();
         }
         return account;
     }
