@@ -15,8 +15,8 @@ class SettingActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
-        val returnToMain = findViewById<Button>(R.id.btn_return)
-        val aboutDev = findViewById<Button>(R.id.btn_about_dev)
+        val returnToMain = findViewById<Button>(R.id.button_log_out)
+        val aboutDev = findViewById<Button>(R.id.button_about_dev)
 
         returnToMain.setOnClickListener {
             val prefManager = PrefManager(this)

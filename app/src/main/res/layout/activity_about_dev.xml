@@ -1,92 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutDevActivity"
-    android:background="#3a808a">
+    android:background="@drawable/about_background">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_below="@id/aboutdev"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/innovation_pana"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"/>
-
-     <TextView
-         android:layout_marginTop="70dp"
-         android:id="@+id/aboutdev"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-
-         android:text="About the Devs"
-         android:textSize="30sp"
-         android:textColor="@color/white"
-         android:layout_centerHorizontal="true"/>
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="is a passionate software developer with expertise in building modern web and mobile applications. With a background in Computer Science"
-        android:layout_below="@id/aboutdev"
-        android:layout_toRightOf="@id/image"
-        android:textColor="@color/white"
-        android:layout_alignTop="@id/image"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"/>
-
-    <TextView
-        android:id="@+id/projectlead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Project Lead"
-        android:textSize="15sp"
-        android:textColor="@color/white"
-        android:layout_below="@id/image"
-        android:layout_alignLeft="@id/image"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
-
-    <ImageView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="176dp"
-        android:layout_below="@id/text"
-        android:layout_marginTop="326dp"
-        android:background="@drawable/bf853c7e_448e_47f3_8a08_e2bae6cdaebf" />
-    <ImageView
-        android:id="@+id/image2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/programming_rafiki"
-        android:layout_below="@id/projectlead"
-        android:layout_alignRight="@id/text"
-        android:layout_marginTop="50dp"/>
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="is a passionate software developer with expertise in building modern web and mobile applications. With a background in Computer Science"
-        android:layout_below="@id/projectlead"
+        android:gravity="center_horizontal"
+        android:padding="24dp">
 
-        android:textColor="@color/white"
-        android:layout_toLeftOf="@id/image2"
-        android:layout_alignTop="@id/image2"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"/>
+        <!-- Developer Profile Image -->
+        <ImageView
+            android:id="@+id/image_profile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/user"
+            android:background="@drawable/circle_background"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lead Developer"
-        android:layout_below="@id/image2"
-        android:layout_alignRight="@id/image2"
-        android:textColor="@color/white"/>
+        <!-- Developer Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:text="Escolano, Ben Joseph"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/title_holder"/>
 
-</RelativeLayout>
+        <!-- Developer Role -->
+        <TextView
+            android:id="@+id/text_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile App Developer"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Short Bio -->
+        <TextView
+            android:id="@+id/text_bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Passionate about creating high-quality mobile applications with a focus on user experience and performance. Always learning and improving."
+            android:textColor="#EEEEEE"
+            android:textSize="16sp"
+            android:lineSpacingExtra="6dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="30dp"/>
+
+        <!-- Contact Information -->
+        <TextView
+            android:id="@+id/text_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact: bjve@example.com"
+            android:textColor="#BBBBBB"
+            android:textSize="14sp"
+/>
+
+
+
+        <!-- Developer Profile Image -->
+        <ImageView
+            android:id="@+id/image_profile2"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/user"
+            android:background="@drawable/circle_background"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Developer Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:text="Erojo, Richimar"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/title_holder"/>
+
+        <!-- Developer Role -->
+        <TextView
+            android:id="@+id/text_role2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile App Developer"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Short Bio -->
+        <TextView
+            android:id="@+id/text_bio2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Passionate about creating high-quality mobile applications with a focus on user experience and performance. Always learning and improving."
+            android:textColor="#EEEEEE"
+            android:textSize="16sp"
+            android:lineSpacingExtra="6dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="30dp"/>
+
+        <!-- Contact Information -->
+        <TextView
+            android:id="@+id/text_contact2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact: bjve@example.com"
+            android:textColor="#BBBBBB"
+            android:textSize="14sp"
+/>
+
+    </LinearLayout>
+
+</ScrollView>

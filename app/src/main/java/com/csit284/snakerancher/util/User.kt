@@ -1,7 +1,7 @@
 package com.csit284.snakerancher.util
 
 data class User(
-    val username: String,
-    val password: String,
-    var highScore: Int
+    var username: String,
+    var password: String,
+    var highScore: Int = 0
 )

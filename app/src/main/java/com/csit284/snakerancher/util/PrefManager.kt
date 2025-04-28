@@ -49,8 +49,56 @@ class PrefManager(context: Context) {
         }
     }
 
+    fun updateUsername(oldUsername: String, newUsername: String): Boolean {
+        val users = getUserList().toMutableList()
+
+        // Check if new username is already taken
+        if (users.any { it.username == newUsername }) {
+            return false
+        }
+
+        val user = users.find { it.username == oldUsername }
+        if (user != null) {
+            user.username = newUsername
+            saveUserList(users)
+            setLoggedInUser(newUsername) // Update the currently logged-in user reference
+            return true
+        }
+        return false
+    }
+
+    fun updatePassword(username: String, newPassword: String): Boolean {
+        val users = getUserList().toMutableList()
+        val user = users.find { it.username == username }
+        if (user != null) {
+            user.password = newPassword
+            saveUserList(users)
+            return true
+        }
+        return false
+    }
+
     fun getUserScore(username: String): Int {
         return getUserList().find { it.username == username }?.highScore ?: 0
+    }
+
+    fun getUserRank(): Int? {
+        val loggedInUser = getLoggedInUser() ?: return null
+        val leaderboard = getLeaderboard()
+
+        leaderboard.forEachIndexed { index, user ->
+            if (user.username == loggedInUser.username) {
+                return index + 1 // Rank is index + 1 because list starts at 0
+            }
+        }
+        return null // If user is not found in leaderboard
+    }
+
+    fun getLeaderboard(): List<User> {
+        val users = getUserList() // Get all users
+        val sortedUsers = users.sortedByDescending { it.highScore } // Sort by high score, descending
+
+        return sortedUsers
     }
 
     fun setLoggedInUser(username: String) {
@@ -82,4 +130,5 @@ class PrefManager(context: Context) {
         }
         return SnakeStyle(colors)
     }
+
 }

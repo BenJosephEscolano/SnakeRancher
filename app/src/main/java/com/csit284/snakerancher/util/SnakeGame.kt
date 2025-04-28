@@ -258,7 +258,7 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
     private fun restartGame() {
         // Reset snake position to starting position
         snake.clear()
-        snake.add(SnakeSegment(100f, 100f, "RIGHT", "RIGHT")) // Add head at center
+        snake.add(SnakeSegment(120f, 120f, "RIGHT", "RIGHT")) // Add head at center
 
         // Reset direction (assuming you store direction)
         direction = "RIGHT"// Or whatever your default direction is

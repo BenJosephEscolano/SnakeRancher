@@ -12,6 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.csit284.snakerancher.util.PrefManager
 
 class ResetPasswordActivity : Activity() {
     @SuppressLint("MissingInflatedId")
@@ -35,12 +36,16 @@ class ResetPasswordActivity : Activity() {
                 Toast.makeText(this,"username and password must not be empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            val prefManager = PrefManager(this)
+            val newPassword = password.text.toString()
 
-//            if (!account.checkUsername(username.text.toString())){
-//                Toast.makeText(this,"username does not exist", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
-//            account.updatePassword(username.text.toString(), password.text.toString())
+            val success = prefManager.updatePassword(username.text.toString(), newPassword)
+            if (success) {
+                Toast.makeText(this, "Password updated successfully!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Failed to update password.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)

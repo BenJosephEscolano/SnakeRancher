@@ -1,110 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#3a808a">
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/a0ddc91e_0c2d_44b7_9554_f0ab8ecaf4ea"
-        android:layout_centerHorizontal="true"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_below="@id/logo"
-        android:id="@+id/textview_title"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+    android:layout_height="match_parent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_background">
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/a0ddc91e_0c2d_44b7_9554_f0ab8ecaf4ea"
+            android:layout_centerHorizontal="true"/>
 
-        android:layout_centerHorizontal="true"
-        android:text="Reset Password"
-        android:textSize="36sp" />
+        <TextView
+            android:id="@+id/textview_title"
+            android:layout_below="@id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:text="Reset Password"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/title_holder"/>
 
-    <TextView
-        android:id="@+id/textview_email"
-        android:textColor="@color/white"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/textview_title"
-        android:text="Email"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/textview_email"
+            android:textColor="@color/white"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_alignLeft="@id/edittext_password"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/textview_title"
+            android:text="Unsername"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/edittext_username"
-        android:layout_width="205dp"
-        android:layout_height="30dp"
-        android:textColor="#808080"
-        android:background="#e5e5e5"
-        android:layout_marginTop="20dp"
-        android:hint="username"
-        android:paddingLeft="15dp"
-        android:layout_below="@id/textview_email"
-        android:layout_centerHorizontal="true"
-        android:textSize="15sp"/>
-    <TextView
-        android:id="@+id/textview_password"
-        android:textColor="@color/white"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/edittext_username"
-        android:text="Password"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/edittext_username"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#808080"
+            android:background="@drawable/edittext_bg"
+            android:hint="username"
+            android:paddingLeft="15dp"
+            android:textSize="16sp"
+            android:inputType="text"
+            android:layout_below="@id/textview_email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="60dp"
+            android:layout_marginLeft="60dp"/>
+        <TextView
+            android:id="@+id/textview_password"
+            android:textColor="@color/white"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_alignLeft="@id/edittext_password"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/edittext_username"
+            android:text="Password"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/edittext_password"
-        android:layout_width="205dp"
-        android:layout_height="30dp"
-        android:textColor="#808080"
-        android:background="#e5e5e5"
-        android:layout_marginTop="20dp"
-        android:hint="password"
-        android:paddingLeft="15dp"
-        android:layout_below="@id/textview_password"
-        android:layout_centerHorizontal="true"
-        android:textSize="15sp"/>
+        <EditText
+            android:id="@+id/edittext_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#808080"
+            android:background="@drawable/edittext_bg"
+            android:hint="password"
+            android:paddingLeft="15dp"
+            android:textSize="16sp"
+            android:inputType="textPassword"
+            android:layout_below="@id/textview_password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginLeft="60dp"/>
 
-    <Button
-        android:id="@+id/button_resetPassword"
-        android:layout_below="@id/edittext_password"
-        android:layout_alignRight="@id/textview_email"
-        android:layout_width="100dp"
-        android:backgroundTint="@color/black"
-        android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Reset Password"
-        android:textSize="8sp"
-        />
+        <Button
+            android:id="@+id/button_resetPassword"
+            android:layout_below="@id/edittext_password"
+            android:layout_alignRight="@id/edittext_password"
+            android:layout_width="100dp"
+            android:backgroundTint="@color/black"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
 
-    <TextView
-        android:id="@+id/cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/edittext_username"
-        android:layout_alignTop="@id/button_resetPassword"
-        android:layout_marginTop="12dp"
-        android:text="Cancel"
-        android:textColor="	#FF4500" />
+            android:text="Reset"
+            android:textSize="12sp"
+            android:background="@drawable/button_bg"/>
 
-    <ImageView
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/edittext_username"
+            android:layout_alignTop="@id/button_resetPassword"
+            android:layout_marginTop="12dp"
+            android:textSize="20sp"
+            android:text="Cancel"
+            android:textColor="	#FF4500" />
 
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:background="@drawable/bf853c7e_448e_47f3_8a08_e2bae6cdaebf"
-        android:layout_below="@id/cancel"/>
-</RelativeLayout>
+        <ImageView
 
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:background="@drawable/bf853c7e_448e_47f3_8a08_e2bae6cdaebf"
+            android:layout_below="@id/cancel"/>
+    </RelativeLayout>
+</ScrollView>
 
 
 

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/pp_bg" />
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:src="@drawable/pp_bg" />-->
 
 <!--    <ImageView-->
 <!--        android:layout_width="match_parent"-->
@@ -19,106 +20,70 @@
         android:src="@drawable/pp_sub_bg" />
 
     <ImageView
+        android:id="@+id/profile_icon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/profile_icon" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/guide" />
-
-    <ImageView
-        android:id="@+id/imageview_exit"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/exit" />
-
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="Edit Profile"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="25dp"/>
-
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:text="STATISTICS"
-        android:textColor="@color/white"
-        android:layout_centerHorizontal="true"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        android:layout_marginTop="210dp"/>
 
     <TextView
         android:id="@+id/textview_score"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:text="Highest Score: 1,250"
+        android:text="High-Score: "
         android:textColor="@color/white"
         android:layout_alignParentStart="true"
         android:textSize="25sp"
         android:layout_marginTop="295dp"
         android:layout_marginStart="60dp"/>
 
+
+
     <TextView
-        android:id="@+id/textview_storyprogress"
+        android:id="@+id/textView_leaderboardrank"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:text="Story Progression: 75%"
+        android:text="Rank: "
         android:textColor="@color/white"
         android:layout_alignParentStart="true"
         android:textSize="25sp"
         android:layout_below="@id/textview_score"
         android:layout_marginStart="60dp"/>
 
-    <TextView
-        android:id="@+id/textView_leaderboardrank"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:text="Leaderboard Ranking: #5"
-        android:textColor="@color/white"
-        android:layout_alignParentStart="true"
-        android:textSize="25sp"
-        android:layout_below="@id/textview_storyprogress"
-        android:layout_marginStart="60dp"/>
-
 
     <TextView
         android:id="@+id/textview_username"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:text="John Smith"
         android:textColor="@color/white"
         android:textSize="46sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp" />
+        android:layout_marginTop="180dp"/>
 
     <Button
         android:id="@+id/button_ranking"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="70dp"
         android:backgroundTint="@color/black"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="480dp"
         android:text="VIEW RANKINGS"
         android:textColor="@color/white"
+        android:background="@drawable/button_bg"
         android:textSize="20sp"/>
 
     <Button
-        android:id="@+id/button_friends"
-        android:layout_width="150dp"
+        android:id="@+id/button_edit"
+        android:layout_width="200dp"
         android:layout_height="70dp"
         android:backgroundTint="@color/forest_green"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_below="@id/button_ranking"
-        android:text="FRIENDS"
+        android:text="Edit Profile"
+        android:background="@drawable/button_bg"
         android:textColor="@color/white"
         android:textSize="20sp"/>
 

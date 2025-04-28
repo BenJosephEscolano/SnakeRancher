@@ -1,152 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingActivity"
-    android:orientation="vertical"
-    android:background="#3a808a">
+    android:background="@drawable/gradient_background"
+    android:padding="20dp"
+    android:gravity="center">
 
+    <!-- Title Text -->
     <TextView
-        android:id="@+id/tv_setting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
         android:text="Settings"
-        android:textSize="60dp"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="50dp"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:layout_marginTop="80dp"
-        />
+        android:background="@drawable/title_holder"/>
 
-    <TextView
-        android:id="@+id/tv_graphics"
-        android:textColor="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Graphics:"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="10dp"
-        android:layout_below="@id/tv_setting"
-        android:textSize="20sp"/>
-    <RadioButton
-        android:id="@+id/rb_graphic_high"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_below="@id/tv_graphics"
-        android:text="High"/>
-    <RadioButton
-        android:id="@+id/rb_graphic_medium"
-        android:layout_width="wrap_content"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_below="@id/rb_graphic_high"
-        android:text="Medium"
-        />
-    <RadioButton
-        android:id="@+id/rb_graphic_low"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_below="@id/rb_graphic_medium"
-        android:text="Low"
-        />
-    <TextView
-        android:id="@+id/tv_sound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Sound:"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/rb_graphic_low"
-        android:layout_alignLeft="@id/tv_graphics"/>
-    <TextView
-        android:id="@+id/tv_music"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Music"
-        android:textSize="15sp"
-        android:layout_below="@id/tv_sound"
-        android:layout_marginTop="10dp"
-        android:layout_alignLeft="@id/rb_graphic_high"/>
-    <RadioButton
-        android:id="@+id/rb_music_on"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="on"
-        android:layout_toRightOf="@id/tv_music"
-        android:layout_marginLeft="20dp"
-        android:layout_alignBaseline="@id/tv_music"
-        />
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"
-        android:text="off"
-        android:layout_toRightOf="@id/rb_music_on"
-        android:layout_marginLeft="20dp"
-        android:layout_alignBaseline="@id/tv_music"
-        />
-
-    <TextView
-        android:id="@+id/tv_sfx"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SFX"
-        android:textSize="15sp"
-        android:layout_below="@id/tv_music"
-        android:layout_marginTop="10dp"
-        android:layout_alignLeft="@id/rb_graphic_high"/>
-    <RadioButton
-        android:id="@+id/rb_sfx_on"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="on"
-        android:layout_alignLeft="@id/rb_music_on"
-
-        android:layout_alignBaseline="@id/tv_sfx"
-        />
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"
-        android:text="off"
-        android:layout_toRightOf="@id/rb_sfx_on"
-        android:layout_marginLeft="20dp"
-        android:layout_alignBaseline="@id/tv_sfx"
-        />
-
-
+    <!-- About Dev Button -->
     <Button
-        android:id="@+id/btn_about_dev"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="about Developers"
-        android:layout_alignLeft="@id/tv_graphics"
-        android:layout_marginTop="50dp"
-        android:layout_below="@id/rb_sfx_on"/>
-    <Button
-        android:id="@+id/btn_return"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Return"
-        android:layout_toRightOf="@id/btn_about_dev"
-        android:layout_alignBaseline="@id/btn_about_dev"
-        android:layout_marginLeft="15dp"/>
-
-    <ImageView
+        android:id="@+id/button_about_dev"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bottom_design"/>
-</RelativeLayout>
+        android:layout_height="60dp"
+        android:text="About Dev"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:background="@drawable/button_shape"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"/>
+
+    <!-- Log Out Button -->
+    <Button
+        android:id="@+id/button_log_out"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Log Out"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:background="@drawable/button_shape"
+        android:backgroundTint="@color/alert_red"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
