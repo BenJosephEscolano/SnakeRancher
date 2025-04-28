@@ -23,7 +23,7 @@ class ResetPasswordActivity : Activity() {
         val username = findViewById<EditText>(R.id.edittext_username)
         val password = findViewById<EditText>(R.id.edittext_password)
         val cancel = findViewById<TextView>(R.id.cancel)
-        val account = AccountManager.create();
+
 
 
         cancel.setOnClickListener(){
@@ -36,11 +36,11 @@ class ResetPasswordActivity : Activity() {
                 return@setOnClickListener
             }
 
-            if (!account.checkUsername(username.text.toString())){
-                Toast.makeText(this,"username does not exist", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            account.updatePassword(username.text.toString(), password.text.toString())
+//            if (!account.checkUsername(username.text.toString())){
+//                Toast.makeText(this,"username does not exist", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
+//            account.updatePassword(username.text.toString(), password.text.toString())
 
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)

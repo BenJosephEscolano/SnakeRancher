@@ -7,33 +7,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/shapeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Snake Shape:"
-        android:textSize="18sp"
-        android:layout_marginBottom="8dp" />
-
-    <RadioGroup
-        android:id="@+id/shapeRadioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/radioSharp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sharp" />
-
-        <RadioButton
-            android:id="@+id/radioRounded"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rounded" />
-    </RadioGroup>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose Snake Colors:"
@@ -74,7 +47,7 @@
                 android:id="@+id/btnGreenHead"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@android:color/holo_green_light" />
+                android:backgroundTint="@android:color/holo_orange_dark" />
 
             <Button
                 android:id="@+id/btnBlueHead"
@@ -116,7 +89,7 @@
                 android:id="@+id/btnGreenBody"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@android:color/holo_green_light" />
+                android:backgroundTint="@android:color/holo_orange_dark" />
             <Button
                 android:id="@+id/btnBlueBody"
                 android:layout_width="match_parent"
@@ -158,7 +131,7 @@
                 android:id="@+id/btnGreenTail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@android:color/holo_green_light" />
+                android:backgroundTint="@android:color/holo_orange_dark" />
             <Button
                 android:id="@+id/btnBlueTail"
                 android:layout_width="match_parent"
@@ -204,13 +177,13 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_green_light" />
+            android:backgroundTint="@android:color/holo_red_light" />
         <Button
             android:id="@+id/snakeTail"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_blue_bright" />
+            android:backgroundTint="@android:color/holo_red_light" />
 
 
         <!-- Add more colors here -->

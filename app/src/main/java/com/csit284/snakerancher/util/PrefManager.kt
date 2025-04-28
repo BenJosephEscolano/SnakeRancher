@@ -69,7 +69,7 @@ class PrefManager(context: Context) {
 
     fun saveSnakeStyle(style: SnakeStyle) {
         val editor = prefs.edit()
-        editor.putString("snake_shape", style.shape.name)
+
         style.colors.forEachIndexed { index, color ->
             editor.putInt("snake_color_$index", color)
         }
@@ -77,10 +77,9 @@ class PrefManager(context: Context) {
     }
 
     fun getSnakeStyle(): SnakeStyle {
-        val shape = SnakeShape.valueOf(prefs.getString("snake_shape", SnakeShape.SHARP.name)!!)
         val colors = List(3) { index ->
             prefs.getInt("snake_color_$index", Color.GREEN) // default color
         }
-        return SnakeStyle(shape, colors)
+        return SnakeStyle(colors)
     }
 }

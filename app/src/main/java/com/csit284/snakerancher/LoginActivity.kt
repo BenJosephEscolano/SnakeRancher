@@ -29,7 +29,7 @@ class LoginActivity : Activity() {
                 edittext_username.setText(username)
             }
             it.getStringExtra("password")?.let{ password->
-                edittext_username.setText(password)
+                edittext_password.setText(password)
             }
         }
 
@@ -41,16 +41,12 @@ class LoginActivity : Activity() {
                 return@setOnClickListener
             }
             val prefManager = PrefManager(this)
-            val isLoggedIn = prefManager.login(edittext_password.text.toString(), edittext_username.text.toString())
+            val isLoggedIn = prefManager.login(edittext_username.text.toString(), edittext_password.text.toString())
             if (!isLoggedIn){
                 Toast.makeText(this, "invalid credentials", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            //Toast.makeText(this, "Credentials: $profile", Toast.LENGTH_LONG).show()
-            /*if (!edittext_password.text.toString().equals(profile.password) || !edittext_username.text.toString().equals(profile.username)){
-                Toast.makeText(this, "invalid credentials", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }*/
+
             val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
 
