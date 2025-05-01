@@ -136,6 +136,14 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
 
     // added eat sfx
     fun update() {
+        // Collision with wall
+        if (snake[0].x < 0 || snake[0].x > width - cellSize ||
+                snake[0].y < 0 || snake[0].y > height - cellSize
+        ) {
+            dead()
+            return
+        }
+
         var newHead = SnakeSegment(snake[0].x, snake[0].y, direction, snake[0].direction)
         when (direction) {
             "LEFT" -> newHead.x -= cellSize
@@ -163,27 +171,24 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
         for (poison in poisoned) {
             val poisonedRect = RectF(poison.x, poison.y, poison.x + cellSize, poison.y + cellSize)
             if (headRect.intersect(poisonedRect)) {
-                running = false
-                break
+                dead()
+                return
             }
         }
-
         // Collision with self
         for (i in 1 until snake.size) {
             if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
-                running = false // Game over
+                dead()
+                return
             }
         }
 
-        // Collision with wall
-        if (snake[0].x < 0 || snake[0].x > width - 50 ||
-            snake[0].y < 0 || snake[0].y > height - 50
-        ) {
-            running = false // Game over
-        }
-        if (running == false) {
-            onGameOver()
-        }
+    }
+
+    private fun dead(){
+        running = false // Game over
+        onGameOver()
+        return
     }
 
     private fun generateRandomFoodPosition(): PointF {
