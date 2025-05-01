@@ -7,6 +7,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -29,6 +30,12 @@ class CustomizationActivity : Activity() {
         val snakeHead = findViewById<Button>(R.id.snakeHead)
         val snakeBody = findViewById<Button>(R.id.snakeBody)
         val snakeTail = findViewById<Button>(R.id.snakeTail)
+
+        // added back button
+        val imageview_back = findViewById<ImageView>(R.id.image_back)
+        imageview_back.setOnClickListener {
+            finish()
+        }
 
         val colorBody = listOf(
             findViewById<Button>(R.id.btnRedBody),

@@ -8,6 +8,23 @@
         android:layout_height="wrap_content"
         android:background="@drawable/gradient_background">
 
+        <!-- added back button -->
+        <LinearLayout
+            android:id="@+id/back_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="20dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/image_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="Back"
+                android:src="@drawable/back_button_white" />
+        </LinearLayout>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,9 +83,44 @@
             android:paddingLeft="15dp"
             android:textSize="16sp"
             android:inputType="textPassword"
-            android:layout_marginBottom="40dp"
             android:layout_marginRight="80dp"
             android:layout_marginLeft="80dp"/>
+
+        <!-- added confirm password -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="60dp"
+            android:textColor="@color/white"
+            android:text="Confirm Password:"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:id="@+id/edittext_confirmpassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#808080"
+            android:background="@drawable/edittext_bg"
+            android:hint="confirm password"
+            android:paddingLeft="15dp"
+            android:textSize="16sp"
+            android:inputType="textPassword"
+            android:layout_marginRight="80dp"
+            android:layout_marginLeft="80dp"/>
+
+        <!-- added show password functionality -->
+        <CheckBox
+            android:id="@+id/checkbox_show_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Password"
+            android:textColor="@color/white"
+            android:layout_marginBottom="40dp"
+            android:layout_marginStart="80dp"/>
+
+
         <Button
             android:id="@+id/btn_register"
             android:layout_width="150dp"

@@ -4,6 +4,7 @@ import LeaderboardAdapter
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -28,6 +29,12 @@ class LeaderboardActivity : Activity() {
         val userList = prefManager.getUserList().sortedByDescending { it.highScore }
         val adapter = LeaderboardAdapter(userList)
         recyclerView.adapter = adapter
+
+        // added back button
+        val imageview_back = findViewById<ImageView>(R.id.image_back)
+        imageview_back.setOnClickListener {
+            finish()
+        }
 
     }
 

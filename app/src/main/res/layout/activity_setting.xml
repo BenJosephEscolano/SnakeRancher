@@ -7,6 +7,23 @@
     android:padding="20dp"
     android:gravity="center">
 
+    <!-- added back button -->
+    <LinearLayout
+        android:id="@+id/back_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="Back"
+            android:src="@drawable/back_button_white" />
+    </LinearLayout>
+
     <!-- Title Text -->
     <TextView
         android:layout_width="wrap_content"
@@ -18,6 +35,25 @@
         android:layout_marginBottom="50dp"
         android:gravity="center"
         android:background="@drawable/title_holder"/>
+
+    <!-- added music/sfx toggles -->
+    <Switch
+        android:id="@+id/switch_music"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable Music"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp" />
+
+    <Switch
+        android:id="@+id/switch_sfx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable SFX"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginBottom="30dp" />
 
     <!-- About Dev Button -->
     <Button

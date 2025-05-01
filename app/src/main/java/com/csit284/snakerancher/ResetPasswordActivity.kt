@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -24,6 +25,12 @@ class ResetPasswordActivity : Activity() {
         val username = findViewById<EditText>(R.id.edittext_username)
         val password = findViewById<EditText>(R.id.edittext_password)
         val cancel = findViewById<TextView>(R.id.cancel)
+
+        // added back button
+        val imageview_back = findViewById<ImageView>(R.id.image_back)
+        imageview_back.setOnClickListener {
+            finish()
+        }
 
 
 

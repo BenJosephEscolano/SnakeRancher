@@ -26,6 +26,12 @@ class ProfileActivity : Activity() {
         val highscore = findViewById<TextView>(R.id.textview_score)
         val rank = findViewById<TextView>(R.id.textView_leaderboardrank)
 
+        // added back button
+        val imageview_back = findViewById<ImageView>(R.id.image_back)
+        imageview_back.setOnClickListener {
+            finish()
+        }
+
 
         val prefManager = PrefManager(this) // Initialize PrefManager
 

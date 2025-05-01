@@ -15,6 +15,8 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.RectF
 import android.graphics.Typeface
+import android.media.SoundPool
+import android.media.AudioAttributes
 import android.os.Handler
 import android.os.Looper
 import android.view.MotionEvent
@@ -47,8 +49,41 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
     private val background = BitmapFactory.decodeResource(resources, R.drawable.grass_template2)
     private val snake = mutableListOf(SnakeSegment(120f, 120f, "RIGHT", "RIGHT"))
 
+    // added game music
+    private var soundPool: SoundPool
+    private var eatSoundId: Int = 0
+    private var gameOverSoundId: Int = 0
+    private var sfxEnabled: Boolean = true
+
+    private var stopMusicCallback: (() -> Unit)? = null
+    private var onGameRestartCallback: (() -> Unit)? = null
+
+    fun setOnGameOverStopMusic(callback: () -> Unit) {
+        this.stopMusicCallback = callback
+    }
+
+    fun setOnRestartStartMusic(callback: () -> Unit) {
+        onGameRestartCallback = callback
+    }
+
     init {
         holder.addCallback(this)
+
+        val prefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+        sfxEnabled = prefs.getBoolean("sfx_enabled", true)
+
+        val audioAttributes = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_GAME)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+
+        soundPool = SoundPool.Builder()
+            .setMaxStreams(4)
+            .setAudioAttributes(audioAttributes)
+            .build()
+
+        eatSoundId = soundPool.load(context, R.raw.eat_sfx, 1)
+        gameOverSoundId = soundPool.load(context, R.raw.game_over, 1)
     }
 
     override fun draw(canvas: Canvas) {
@@ -95,6 +130,7 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
         }
     }
 
+    // added eat sfx
     fun update() {
         var newHead = SnakeSegment(snake[0].x, snake[0].y, direction, snake[0].direction)
         when (direction) {
@@ -114,6 +150,8 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
             food = generateRandomFoodPosition() // Generate new food
             poisoned = generateRandomFoodPosition()
             score += 50;
+            // added eat sfx
+            if (sfxEnabled) soundPool.play(eatSoundId, 1f, 1f, 1, 0, 1f)
             // Don't remove tail => snake grows
         } else {
             snake.removeAt(snake.size - 1) // Remove tail
@@ -197,7 +235,12 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
         return n;
     }
 
+    // added game over sfx
     fun onGameOver() {
+        // added game over sfx
+        stopMusicCallback?.invoke() // stop music
+        if (sfxEnabled) soundPool.play(gameOverSoundId, 1f, 1f, 1, 0, 1f)
+
         // Save score or anything else
         val prefManager = PrefManager(context)
         prefManager.getLoggedInUser()?.let { prefManager.updateScore(it.username, score) }
@@ -208,6 +251,7 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
                 .setMessage("Your score: $score")
                 .setCancelable(false)
                 .setPositiveButton("Restart") { _, _ ->
+                    onGameRestartCallback?.invoke() // Start music again
                     restartGame()
                 }
                 .setNegativeButton("Exit") { _, _ ->
@@ -288,5 +332,6 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
     override fun surfaceDestroyed(holder: SurfaceHolder) {
         running = false
         gameThread?.join()
+        soundPool.release() // cleanup
     }
 }
