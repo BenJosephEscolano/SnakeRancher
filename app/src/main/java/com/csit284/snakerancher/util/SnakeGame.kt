@@ -24,6 +24,7 @@ import com.csit284.snakerancher.MenuActivity
 import com.csit284.snakerancher.R
 import extRemoveLast
 import kotlin.math.abs
+import kotlin.math.floor
 import kotlin.random.Random
 
 class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback {
@@ -32,8 +33,8 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
 
     private var direction = "RIGHT" // Default direction
     private val cellSize = 40f;
-    private var food = PointF(280f, 280f)
-    private var poisoned = PointF(200f,400f)
+    private var food = PointF(0f,0f)
+    private val poisoned = mutableListOf<PointF>()
 
     private var touchStartX = 0f
     private var touchStartY = 0f
@@ -61,8 +62,10 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
 
         // Draw Food (same as before)
         canvas.drawBitmap(foodBitmap, food.x, food.y, null)
-        paint.colorFilter = PorterDuffColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN)
-        canvas.drawBitmap(foodBitmap, poisoned.x, poisoned.y, paint)
+        paint.colorFilter = PorterDuffColorFilter(Color.parseColor("#7F00FF"), PorterDuff.Mode.SRC_IN)
+        for (poison in poisoned) {
+            canvas.drawBitmap(foodBitmap, poison.x, poison.y, paint)
+        }
 
         paint.color = Color.WHITE
         paint.colorFilter = null
@@ -109,17 +112,21 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
         // Check if food is eaten
         val headRect = RectF(newHead.x, newHead.y, newHead.x + cellSize, newHead.y + cellSize)
         val foodRect = RectF(food.x, food.y, food.x + cellSize, food.y + cellSize)
-        val poisonedRect = RectF(poisoned.x, poisoned.y, poisoned.x + cellSize, poisoned.y + cellSize)
+        //val poisonedRect = RectF(poisoned.x, poisoned.y, poisoned.x + cellSize, poisoned.y + cellSize)
         if (headRect.intersect(foodRect)) {
+            poisoned.add(generateRandomFoodPosition())
             food = generateRandomFoodPosition() // Generate new food
-            poisoned = generateRandomFoodPosition()
             score += 50;
             // Don't remove tail => snake grows
         } else {
             snake.removeAt(snake.size - 1) // Remove tail
         }
-        if (headRect.intersect(poisonedRect)){
-            running = false
+        for (poison in poisoned) {
+            val poisonedRect = RectF(poison.x, poison.y, poison.x + cellSize, poison.y + cellSize)
+            if (headRect.intersect(poisonedRect)) {
+                running = false
+                break
+            }
         }
 
         // Collision with self
@@ -142,8 +149,8 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
 
     private fun generateRandomFoodPosition(): PointF {
         val gridSize = 40
-        val cols = width / gridSize
-        val rows = height / gridSize
+        val cols = floor(width / gridSize.toFloat()).toInt()
+        val rows = floor(height / gridSize.toFloat()).toInt()
 
         var point: PointF
         var collision: Boolean
@@ -153,9 +160,8 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
             val randomRow = (0 until rows).random()
             point = PointF((randomCol * gridSize).toFloat(), (randomRow * gridSize).toFloat())
 
-            collision = snake.any { segment ->
-                segment.x == point.x && segment.y == point.y
-            }
+            collision = snake.any { segment -> segment.x == point.x && segment.y == point.y } ||
+                    poisoned.any { poison -> poison.x == point.x && poison.y == point.y }
         } while (collision)
 
         return point
@@ -218,6 +224,14 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
     }
 
     private fun startGameLoop() {
+        snake.clear()
+        snake.add(SnakeSegment(120f, 120f, "RIGHT", "RIGHT"))
+        direction = "RIGHT"
+
+
+        poisoned.clear()
+        poisoned.add(generateRandomFoodPosition())
+        food = generateRandomFoodPosition()
         running = true
         gameThread = Thread {
             var lastTime = System.nanoTime()
@@ -259,7 +273,9 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
         // Reset snake position to starting position
         snake.clear()
         snake.add(SnakeSegment(120f, 120f, "RIGHT", "RIGHT")) // Add head at center
-
+        poisoned.clear()
+        poisoned.add(generateRandomFoodPosition())
+        food = generateRandomFoodPosition()
         // Reset direction (assuming you store direction)
         direction = "RIGHT"// Or whatever your default direction is
 
