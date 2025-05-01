@@ -285,9 +285,6 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
         // Clear any pending movement handlers
         handler.removeCallbacksAndMessages(null)
 
-        // Reset food position
-        food = PointF(300f, 300f)
-
         // Reset game speed if you have increasing difficulty
 
         // Start the game loop again
