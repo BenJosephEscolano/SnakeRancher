@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
+
+    <!-- Title Holder Image -->
+    <ImageView
+        android:id="@+id/imageview_titleholder"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:src="@drawable/title_holder"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <!-- Bottom Design Image -->
+    <ImageView
+        android:id="@+id/imageview_bottomdesign"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/bottom_design" />
+
+    <!-- Snake Text -->
+    <TextView
+        android:id="@+id/textview_snake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
+        android:text="SNAKE"
+        android:textColor="@color/white"
+        android:textSize="46sp"
+        android:textStyle="bold" />
+
+    <!-- Rancher Text -->
+    <TextView
+        android:id="@+id/textview_rancher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="105dp"
+        android:text="RANCHER"
+        android:textColor="@color/white"
+        android:textSize="46sp"
+        android:textStyle="bold" />
+
+    <!-- Game Logo Image -->
+    <ImageView
+        android:id="@+id/imageview_gamelogo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@id/imageview_titleholder"
+        android:layout_marginTop="-10dp"
+        android:src="@drawable/game_logo"
+        android:layout_centerHorizontal="true" />
+
+    <!-- Start Button -->
+    <Button
+        android:id="@+id/button_start"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/imageview_gamelogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_roundstyle"
+        android:backgroundTint="@color/black"
+        android:text="START"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <!-- Exit Button -->
+    <Button
+        android:id="@+id/button_exit"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/button_start"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_roundstyle"
+        android:backgroundTint="@color/alert_red"
+        android:text="EXIT"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+</RelativeLayout>

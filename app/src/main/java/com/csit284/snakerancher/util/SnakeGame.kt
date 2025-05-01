@@ -41,6 +41,7 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
     private var touchStartX = 0f
     private var touchStartY = 0f
     private val swipeThreshold = 50
+    private var speed = 8.0
 
     private var score = 0;
 
@@ -188,7 +189,7 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
     private fun generateRandomFoodPosition(): PointF {
         val gridSize = 40
         val cols = floor(width / gridSize.toFloat()).toInt()
-        val rows = floor(height / gridSize.toFloat()).toInt()
+        val rows = floor((height - 100)/ gridSize.toFloat()).toInt()
 
         var point: PointF
         var collision: Boolean
@@ -261,7 +262,9 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
                     restartGame()
                 }
                 .setNegativeButton("Exit") { _, _ ->
-                    context.startActivity(Intent(context, MenuActivity::class.java))
+                    val intent = Intent(context, MenuActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    context.startActivity(intent)
                 }
                 .show()
         }
@@ -279,7 +282,7 @@ class SnakeGame(context: Context) : SurfaceView(context), SurfaceHolder.Callback
         running = true
         gameThread = Thread {
             var lastTime = System.nanoTime()
-            val nsPerUpdate = 1_000_000_000.0 / 10.0 // 10 updates per second
+            val nsPerUpdate = 1_000_000_000.0 / speed // 10 updates per second
 
             var delta = 0.0
 

@@ -10,7 +10,7 @@ class LandingPageActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.landingpage)
+        setContentView(R.layout.activity_landing_page)
 
         // Initialize buttons
         val startButton = findViewById<Button>(R.id.button_start)

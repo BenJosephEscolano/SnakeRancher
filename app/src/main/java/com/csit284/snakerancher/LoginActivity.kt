@@ -6,7 +6,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
-import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -19,7 +18,7 @@ class LoginActivity : Activity() {
     //@SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login)
+        setContentView(R.layout.activity_login)
 
 
         val edittext_password = findViewById<EditText>(R.id.edittext_password)

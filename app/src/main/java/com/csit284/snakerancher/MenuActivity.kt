@@ -5,16 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.csit284.snakerancher.util.PrefManager
 
 class MenuActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.mainmenu)
+        setContentView(R.layout.activity_mainmenu)
 
         val button_leaderboard = findViewById<Button>(R.id.button_leaderboard)
         val imageview_user = findViewById<ImageView>(R.id.user_icon)
@@ -46,6 +42,7 @@ class MenuActivity : Activity() {
             val prefManager = PrefManager(this)
             prefManager.logoutUser()
             val intent = Intent(this, LandingPageActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
     }

@@ -8,12 +8,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.csit284.snakerancher.util.PrefManager
 import com.csit284.snakerancher.util.User
 
@@ -21,7 +16,7 @@ class RegisterActivity : Activity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.signup)
+        setContentView(R.layout.activity_signup)
 
         val registerButton = findViewById<Button>(R.id.btn_register)
         val edittext_password = findViewById<EditText>(R.id.edittext_password)
